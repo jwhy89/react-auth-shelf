@@ -12,7 +12,7 @@ class ShelfListItem extends Component {
         return(
             <tr>
                 <td>{this.props.shelfList.description}</td>
-                <td>{this.props.shelfList.image_url}</td>
+                <td><img src={this.props.shelfList.image_url} alt={this.props.shelfList.description}/></td>
                 <td><button onClick={this.deleteItem} name={this.props.shelfList.id}>Delete</button></td>
             </tr>
         );
