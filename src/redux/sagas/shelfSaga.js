@@ -15,13 +15,25 @@ function* fetchShelf () {
 
 function* postItem ( action ) {
     try {
-        const item = yield axios.post('/api/shelf', action.payload);
-        console.log(`item data is`, item);
+        const additem = yield axios.post('/api/shelf', action.payload);
+        console.log(`item data is`, addItem);
         yield put({ type: 'ADD_ITEM' })
     }
     catch( error ) {
         console.log(`error adding item to shelf`, error);
         alert(`Sorry, couldn't add item to YOUR shelf.`)
+    }
+}
+
+function* deleteItem ( action ) {
+    try {
+        const removeItem = yield axios.delete(`/api/shelf/${action.payload}`);
+        console.log(`id for item to delete is`, removeItem);
+        yield put({ type: 'DELETE_ITEM' });
+    }
+    catch ( error ) {
+        console.log(`error adding item to shelf`, error);
+        alert(`Sorry, couldn't delete YOUR item`);
     }
 }
 
