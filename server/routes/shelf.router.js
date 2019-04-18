@@ -23,7 +23,16 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-
+    let newItem = req.body;
+    const sqlText = `INSERT INTO "item" ("description", "img_url") VALUES( $1, $2 );`;
+    pool.query(sqlText, [newItem.description, newItem.img_url])
+    .then( response => {
+        console.log(`successfully added newItem to database`, newItem);
+        res.sendStatus(201);
+    }).catch( error => {
+        console.log(`error adding newItem to database`, error);
+        res.sendStatus(500);
+    })
 });
 
 
