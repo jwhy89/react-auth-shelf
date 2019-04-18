@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux;'
-import ShelfListItem from '../ShelfListItem/ShelfListItem'
+import { connect } from 'react-redux';
+import ShelfListItem from '../ShelfListItem/ShelfListItem';
 
 class ShelfList extends Component {
 
