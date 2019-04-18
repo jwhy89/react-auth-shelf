@@ -6,7 +6,7 @@ class ShelfListForm extends Component {
 
 state = {
     newItem: {
-        url: '',
+        image_url: '',
         description: '',
     }
 }
@@ -16,18 +16,21 @@ handleChange = (e) => {
     this.setState({
         newItem: {
         ...this.state.newItem,
-        [e.target.name]: [e.target.value],
+        [e.target.name]: e.target.value,
         }
     })
 }
 
-handleSubmit = (e) => {
-e.preventDefault();
-//this.props.dispatch({type:'ADD_SHELF_ITEM', payload: this.state.newItem});
+handleSubmit = (event) => {
+event.preventDefault();
+console.log(`This submit has been HANDLED`);
+
+this.props.dispatch({type:'ADD_ITEM', payload: this.state.newItem});
 this.setState({
     newItem : {
-        url:'',
+        image_url:'',
         description: '',
+        user_id: ''
     }
 })
 }
@@ -38,12 +41,12 @@ this.setState({
                 <label>
                     Image URL
                 </label>
-                <input type='text' onChange={this.handleChange} name='url' value={this.state.newItem.url} />
+                <input type='text' onChange={this.handleChange} name='image_url' value={this.state.newItem.image_url} />
                 <label>
                     Description
                 </label>
                 <input type='text' onChange={this.handleChange} name='description' value={this.state.newItem.description} />
-            <button onSubmit={this.handleSubmit}>Submit</button>
+            <button onClick={this.handleSubmit}>Submit</button>
             </form>
         )
     }
