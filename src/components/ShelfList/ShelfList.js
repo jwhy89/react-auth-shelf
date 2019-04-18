@@ -20,7 +20,7 @@ componentDidMount() {
                 </thead>
                 <tbody>
                     {/* Render each item from the shelfList reducer */}
-                    {this.props.reduxState.shelfList.map((shelfList, i) => {
+                    {this.props.reduxState.shelfListReducer.map((shelfList, i) => {
                         return (<ShelfListItem key={i} shelfList={shelfList} />);
                     })}
                 </tbody>

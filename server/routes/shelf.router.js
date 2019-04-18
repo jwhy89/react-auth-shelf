@@ -24,8 +24,11 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     let newItem = req.body;
-    const sqlText = `INSERT INTO "item" ("description", "img_url") VALUES( $1, $2 );`;
-    pool.query(sqlText, [newItem.description, newItem.img_url])
+    console.log(req.user);
+    console.log(req.body);
+
+    const sqlText = `INSERT INTO "item" ("description", "image_url", "user_id") VALUES( $1, $2, $3 );`;
+    pool.query(sqlText, [newItem.description, newItem.image_url, req.user.id])
     .then( response => {
         console.log(`successfully added newItem to database`, newItem);
         res.sendStatus(201);

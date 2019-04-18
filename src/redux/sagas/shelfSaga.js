@@ -17,7 +17,7 @@ function* postItem ( action ) {
     try {
         const addItem = yield axios.post('/api/shelf', action.payload);
         console.log(`item data is`, addItem);
-        yield put({ type: 'GET_ITEM' })
+        yield put({ type: 'GET_SHELF' })
     }
     catch( error ) {
         console.log(`error adding item to shelf`, error);
@@ -29,7 +29,7 @@ function* deleteItem ( action ) {
     try {
         const removeItem = yield axios.delete(`/api/shelf/${action.payload}`);
         console.log(`id for item to delete is`, removeItem);
-        yield put({ type: 'GET_ITEM' });
+        yield put({ type: 'GET_SHELF' });
     }
     catch ( error ) {
         console.log(`error adding item to shelf`, error);
