@@ -4,6 +4,11 @@ import ShelfListItem from '../ShelfListItem/ShelfListItem';
 
 class ShelfList extends Component {
 
+componentDidMount() {
+    const action = {type: 'GET_SHELF'};
+    this.props.dispatch(action);
+}
+
     render(){
         return(
             <>
