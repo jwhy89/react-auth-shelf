@@ -6,7 +6,16 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+    const sqlText = `SELECT * FROM "item";`;
+    pool.query(sqlText)
+        .then(result => {
+            let shelf = result.rows
+            console.log(`successfully got all the stuff!`, shelf);
+            res.send(shelf)// For testing only, can be removed
+        }).catch(error => {
+            console.log(`error getting all the stuff`, error);
+            res.sendStatus(500);
+        })
 });
 
 
@@ -14,7 +23,16 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-
+    let newItem = req.body;
+    const sqlText = `INSERT INTO "item" ("description", "img_url") VALUES( $1, $2 );`;
+    pool.query(sqlText, [newItem.description, newItem.img_url])
+    .then( response => {
+        console.log(`successfully added newItem to database`, newItem);
+        res.sendStatus(201);
+    }).catch( error => {
+        console.log(`error adding newItem to database`, error);
+        res.sendStatus(500);
+    })
 });
 
 
@@ -22,7 +40,16 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-
+    let id = req.params.id;
+    const sqlText = `DELETE FROM "item" WHERE "id"=$1;`;
+    pool.query( sqlText, [id])
+    .then( response => {
+        console.log(`successfully deleted item from database at`, id);
+        res.sendStatus(204)
+    }).catch( error => {
+        console.log(`error deleting item from database at`, id);
+        res.sendStatus(500);
+    })
 });
 
 
