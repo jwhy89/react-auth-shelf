@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 class Admin extends Component {
 
 componentDidMount() {
-
+    const action = {type: 'GET_COUNT'};
+    this.props.dispatch(action);
 }
 
 
@@ -24,13 +25,13 @@ componentDidMount() {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.reduxState.countReducer.map((count, i) =>
+                    {this.props.reduxState.adminReducer.map((count, i) =>
                  <tr key={i}>
                  <td>
                      {count.user.username}
                  </td>
                  <td>
-                     {count.user.username}
+                     {count.user.count}
                  </td>
                  </tr> 
                     )}
