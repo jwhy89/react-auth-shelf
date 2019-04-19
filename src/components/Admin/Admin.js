@@ -28,10 +28,10 @@ componentDidMount() {
                     {this.props.reduxState.adminReducer.map((count, i) =>
                  <tr key={i}>
                  <td>
-                     {count.user.username}
+                     {count.username}
                  </td>
                  <td>
-                     {count.user.count}
+                     {count.count}
                  </td>
                  </tr> 
                     )}
