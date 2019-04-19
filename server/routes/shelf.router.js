@@ -19,6 +19,21 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.get('/admin', (req, res) => {
+    const sqlText = `SELECT "user"."username", COUNT ("item"."id") AS "count" FROM "user"
+                     LEFT JOIN "item" ON "item"."user_id" = "user"."id"
+                     GROUP BY "user"."username";`;
+    pool.query(sqlText)
+        .then(result => {
+            let shelf = result.rows
+            console.log(`successfully got all the stuff!`, shelf);
+            res.send(shelf)// For testing only, can be removed
+        }).catch(error => {
+            console.log(`error getting all the stuff`, error);
+            res.sendStatus(500);
+        })
+});
+
 
 /**
  * Add an item for the logged in user to the shelf
